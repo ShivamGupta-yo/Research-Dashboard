@@ -14,7 +14,7 @@ SRC_LANG = "hin_Deva"
 TGT_LANG = "zsm_Latn"
 
 @st.cache_resource
-@st.cache_resource
+
 def load_models():
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = "3"
@@ -61,12 +61,30 @@ def render():
         **Authors:** Xiao Liang, Yen-Min Jasmina Khaw, Soung-Yue Liew, Tien-Ping Tan, Donghong Qin
 
         **Published:** IEEE Access, 2025
-
-        **Core idea:** Apply LoRA (Low-Rank Adaptation) to fine-tune multilingual translation
-        models for specific low-resource language pairs, using separate lightweight adapters
-        per pair on top of a shared frozen backbone.
         """)
 
+        st.subheader("Key Contributions")
+        st.markdown("""
+        1. **Targeted fine-tuning methodology** — adjusts model parameters at specific
+        locations to align with each target language's linguistic characteristics
+        2. **Systematic layer/module analysis** — investigates which specific Transformer
+        layers and modules are most effective for low-resource translation quality
+        3. **Efficiency vs. quality trade-off study** — compares LSFTL against traditional
+        full fine-tuning in both translation quality and computational cost
+        """)
+
+        st.subheader("Key Figure: LSFTL Adapter Structure")
+        st.image("papers/lsftl/assets/figure3.png",
+                caption="Model Structure of LSFTL Adapters (Liang et al., 2025)")
+
+        st.subheader("Limitations (as stated by the authors)")
+        st.markdown("""
+        - For **extremely low-resource languages** (fewer than 10,000 parallel sentences),
+        LSFTL may still struggle to capture language-specific nuances adequately
+        - As the **number of language pairs increases**, maintaining separate adapters per
+        pair grows in computational complexity, potentially limiting scalability for
+        very large multilingual systems
+        """)
     with tab2:
         st.header("Dataset")
         st.markdown("""
@@ -123,3 +141,4 @@ def render():
             with col2:
                 st.subheader("LSFTL (LoRA fine-tuned)")
                 st.success(lora_output)
+                
