@@ -16,8 +16,8 @@ TGT_LANG = "zsm_Latn"
 @st.cache_resource
 
 def load_models():
-    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-    os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+    # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is not available. Refusing to run on CPU.")
